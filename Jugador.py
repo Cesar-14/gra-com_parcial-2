@@ -2,22 +2,29 @@ from OpenGL.GL import *
 from glew_wish import *
 import glfw
 import math
-# from Principal import *
+from Modelo import Modelo
 
-class Jugador:
+class Jugador(Modelo):
     #unidades por segundo
-    velocidad = 0.4
-    posicion = [-0.2, 0.0, 0.0]
-    tiempo_anterior = 0.0
-    posicion = [-0.7, 0.7, 0.0]
+    # velocidad = 0.4
+    # posicion = [-0.2, 0.0, 0.0]
+    # tiempo_anterior = 0.0
+    # posicion = [-0.7, 0.7, 0.0]
+    # posicion_x = -0.7
+    # posicion_y = 0.7
+    # posicion_z = 0.0
     fase = 90.0
     avanzar = True
     window = None
 
+    def __init__(self):
+        super().__init__(-0.7, 0.7, 0.0, 0.4, 0.0)
+        self._velocidad = 0.01
+
     def dibujar(self):
 
         glPushMatrix()
-        glTranslatef(self.posicion[0], self.posicion[1], 0.0)
+        glTranslatef(self.posicion_x, self.posicion_y, 0.0)
         glBegin(GL_QUADS)
         # if colisionando():
         #     glColor3f(0,0,1)
@@ -40,7 +47,7 @@ class Jugador:
 
         glPopMatrix()
 
-    def actualizar(self):
+    def actualizar(self, tiempo_delta, window):
 
         tiempo_actual = glfw.get_time()
         # Cuanto tiempo paso entre la ejecucion actual
@@ -51,19 +58,19 @@ class Jugador:
         cantidad_movimiento = self.velocidad * tiempo_delta
 
         # Controles jugador
-        estado_tecla_w = glfw.get_key(self.window, glfw.KEY_UP)
-        estado_tecla_s = glfw.get_key(self.window, glfw.KEY_DOWN)
-        estado_tecla_a = glfw.get_key(self.window, glfw.KEY_RIGHT)
-        estado_tecla_d = glfw.get_key(self.window, glfw.KEY_LEFT)
+        estado_tecla_w = glfw.get_key(window, glfw.KEY_UP)
+        estado_tecla_s = glfw.get_key(window, glfw.KEY_DOWN)
+        estado_tecla_a = glfw.get_key(window, glfw.KEY_RIGHT)
+        estado_tecla_d = glfw.get_key(window, glfw.KEY_LEFT)
 
         if estado_tecla_w == glfw.PRESS:
-            self.posicion[1] = self.posicion[1] + cantidad_movimiento
+            self.posicion_y = self.posicion_y + cantidad_movimiento
         if estado_tecla_s == glfw.PRESS:
-            self.posicion[1] = self.posicion[1] - cantidad_movimiento
+            self.posicion_y = self.posicion_y - cantidad_movimiento
         if estado_tecla_a == glfw.PRESS:
-            self.posicion[0] = self.posicion[0] + cantidad_movimiento
+            self.posicion_x = self.posicion_x + cantidad_movimiento
         if estado_tecla_d == glfw.PRESS:
-            self.posicion[0] = self.posicion[0] - cantidad_movimiento
+            self.posicion_x = self.posicion_x - cantidad_movimiento
         
         # if estado_tecla_w == glfw.PRESS:
         #     if not colisionando():

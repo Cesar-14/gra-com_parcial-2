@@ -8,16 +8,17 @@ from OpenGL.GL import *
 from glew_wish import *
 import glfw
 import math
-# from Principal import *
+from Modelo import Modelo
 
-class Triangulo:
-    velocidad = 0.4
-    posicion = 0.0
-    angulo = 0.0
-    velocidad_rotacion = 400.0
-    tiempo_anterior = 0.0
-    direccion = 0
+class Triangulo(Modelo):
+    
 
+    def __init__(self):
+        super().__init__(-0.7, 0.7, 0.0, 0.4, 0.0)
+        self.velocidad = 0.4
+        self.tiempo_anterior = 0.0
+        self.angulo = 0.0     
+        self.velocidad_rotacion = 400
 
     def actualizar_triangulo(self, tiempo_delta):
 
@@ -30,18 +31,18 @@ class Triangulo:
 
         if self.direccion == 0:
             self.angulo = self.angulo + cantidad_rotacion
-            self.posicion = self.posicion - cantidad_movimiento
+            self.posicion_x = self.posicion_x - cantidad_movimiento
             if self.angulo > 360.0:
                 self.angulo = self.angulo - 360.0 
         if self.direccion == 1:
             self.angulo = self.angulo - cantidad_rotacion
-            self.posicion = self.posicion + cantidad_movimiento
+            self.posicion_x = self.posicion_x + cantidad_movimiento
             if self.angulo < 0.0:
                 self.angulo = self.angulo + 360.0
-        if self.posicion <= -0.75 and self.direccion == 0:
+        if self.posicion_x <= -0.75 and self.direccion == 0:
             self.direccion = 1
 
-        if self.posicion >= 0.75 and self.direccion == 1:
+        if self.posicion_x >= 0.75 and self.direccion == 1:
             self.direccion = 0
 
         self.tiempo_anterior = tiempo_actual
@@ -63,7 +64,7 @@ class Triangulo:
 
     def dibujar(self):
         glPushMatrix()
-        glTranslatef(self.posicion, 0.91,0.0)
+        glTranslatef(self.posicion_x, 0.91,0.0)
         glRotatef(self.angulo, 0.0, 0.0, 1.0)
         glBegin(GL_TRIANGLES)
 
