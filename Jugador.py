@@ -3,6 +3,9 @@ from glew_wish import *
 import glfw
 import math
 from Modelo import Modelo
+from Limites import *
+
+limites = Limites()
 
 class Jugador(Modelo):
     #unidades por segundo
@@ -13,13 +16,13 @@ class Jugador(Modelo):
     # posicion_x = -0.7
     # posicion_y = 0.7
     # posicion_z = 0.0
-    fase = 90.0
+    # fase = 90.0
     avanzar = True
     window = None
 
     def __init__(self):
-        super().__init__(-0.7, 0.7, 0.0, 0.4, 0.0)
-        self._velocidad = 0.01
+        super().__init__(-0.7, 0.7, 0.0, 0.003, 0.0)
+        self._velocidad = 0.003
 
     def dibujar(self):
 
@@ -63,32 +66,47 @@ class Jugador(Modelo):
         estado_tecla_a = glfw.get_key(window, glfw.KEY_RIGHT)
         estado_tecla_d = glfw.get_key(window, glfw.KEY_LEFT)
 
-        if estado_tecla_w == glfw.PRESS:
-            self.posicion_y = self.posicion_y + cantidad_movimiento
-        if estado_tecla_s == glfw.PRESS:
-            self.posicion_y = self.posicion_y - cantidad_movimiento
-        if estado_tecla_a == glfw.PRESS:
-            self.posicion_x = self.posicion_x + cantidad_movimiento
-        if estado_tecla_d == glfw.PRESS:
-            self.posicion_x = self.posicion_x - cantidad_movimiento
-        
         # if estado_tecla_w == glfw.PRESS:
-        #     if not colisionando():
-        #         posicion_cuadrado[1] = posicion_cuadrado[1] + cantidad_movimiento
-        #     else:
-        #         posicion_cuadrado = [-0.7, 0.7, 0.0]
+        #     self.posicion_y = self.posicion_y + cantidad_movimiento
         # if estado_tecla_s == glfw.PRESS:
-        #     if not colisionando():
-        #         posicion_cuadrado[1] = posicion_cuadrado[1] - cantidad_movimiento
-        #     else:
-        #         posicion_cuadrado = [-0.7, 0.7, 0.0]
+        #     self.posicion_y = self.posicion_y - cantidad_movimiento
         # if estado_tecla_a == glfw.PRESS:
-        #     if not colisionando():
-        #         posicion_cuadrado[0] = posicion_cuadrado[0] + cantidad_movimiento
-        #     else:
-        #         posicion_cuadrado = [-0.7, 0.7, 0.0]
+        #     self.posicion_x = self.posicion_x + cantidad_movimiento
         # if estado_tecla_d == glfw.PRESS:
-        #     if not colisionando():
-        #         posicion_cuadrado[0] = posicion_cuadrado[0] - cantidad_movimiento
-        #     else:
-        #         posicion_cuadrado = [-0.7, 0.7, 0.0]
+        #     self.posicion_x = self.posicion_x - cantidad_movimiento
+        
+        if estado_tecla_w == glfw.PRESS:
+            if not limites.colisionando():
+                self.posicion_y = self.posicion_y + cantidad_movimiento
+            else:
+                # posicion_cuadrado = [-0.7, 0.7, 0.0]
+                self.posicion_x = -0.7
+                self.posicion_y = 0.7
+                self.posicion_z = 0.0
+
+        if estado_tecla_s == glfw.PRESS:
+            if not limites.colisionando():
+                self.posicion_y = self.posicion_y - cantidad_movimiento
+            else:
+                # posicion_cuadrado = [-0.7, 0.7, 0.0]
+                self.posicion_x = -0.7
+                self.posicion_y = 0.7
+                self.posicion_z = 0.0
+
+        if estado_tecla_a == glfw.PRESS:
+            if not limites.colisionando():
+                self.posicion_x = self.posicion_x + cantidad_movimiento
+            else:
+                # posicion_cuadrado = [-0.7, 0.7, 0.0]
+                self.posicion_x = -0.7
+                self.posicion_y = 0.7
+                self.posicion_z = 0.0
+
+        if estado_tecla_d == glfw.PRESS:
+            if not limites.colisionando():
+                self.posicion_x = self.posicion_x - cantidad_movimiento
+            else:
+                # posicion_cuadrado = [-0.7, 0.7, 0.0]
+                self.posicion_x = -0.7
+                self.posicion_y = 0.7
+                self.posicion_z = 0.0

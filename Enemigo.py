@@ -1,26 +1,26 @@
-#Comandos para librerías
-#pip install pyopengl
-#pip install glfw
-
-#Importar librerias
 
 from OpenGL.GL import *
 from glew_wish import *
 import glfw
 import math 
-# from Principal import *
+from Modelo import Modelo
+from Jugador import *
 
-class Enemigo:
-    velocidad = 0.4
-    posicion_triangulo = 0.0
-    tiempo_anterior = 0.0
+class Enemigo(Modelo):
     direccion = 1
-    posicion_cuadrado = [-0.7, 0.7, 0.0]
     posicion = 0.0
 
-    def actualizar_cuadrado(self, tiempo_delta):
+    def __init__(self):
+        super().__init__(-0.7, 0.7, 0.0, 3, 0)
+        self.velocidad = 3
+        self.angulo = 0.0     
+        self.velocidad_rotacion = 400
+        self.posicion = 0.0
+
+    def actualizar_enemigo(self, tiempo_delta):
 
         cantidad_movimiento = self.velocidad * tiempo_delta
+        
         
         if self.direccion == 0:
             self.posicion = self.posicion - cantidad_movimiento
@@ -32,34 +32,32 @@ class Enemigo:
 
         if self.posicion >= 0.75 and self.direccion == 1:
             self.direccion = 0
-
-
-
+    
     def actualizar(self):
 
         tiempo_actual = glfw.get_time()
         # Cuanto tiempo paso entre la ejecucion actual
         # y la inmediata anterior de esta funcion
-        tiempo_delta = tiempo_actual - tiempo_anterior
+        tiempo_delta = tiempo_actual - self.tiempo_anterior
         
         # Revisamos estados y realizamos acciones
-        self.cantidad_movimiento = self.velocidad * tiempo_delta
+        self.actualizar_enemigo(tiempo_delta)
+        self.tiempo_anterior = tiempo_actual
 
-        if self.colision_enemigos():
-            self.posicion_cuadrado = [-0.7, 0.7, 0.0]
-
-        self.actualizar_cuadrado(tiempo_delta)
-        tiempo_anterior = tiempo_actual
+        # if colision_enemigos():
+        # posicion_x = -0.7
+        # posicion_y = 0.7
+        # pisicion_z = 0.0
 
 
     def colision_enemigos(self):
         # Colisión enemigos
         colision_enemigos = False
 
-        if (self.posicion + 0.05 >= self.posicion_cuadrado[0] - 0.05
-            and self.posicion - 0.05 <= self.posicion_cuadrado[0] + 0.05
-            and self.posicion + 0.05 >= self.posicion_cuadrado[1] - 0.05
-            and self.posicion - 0.05 <= self.posicion_cuadrado[1] + 0.05):
+        if (self.posicion + 0.05 >= Jugador.posicion_x - 0.05
+            and self.posicion - 0.05 <= Jugador.posicion_x + 0.05
+            and self.posicion + 0.05 >= Jugador.posicion_y - 0.05
+            and self.posicion - 0.05 <= Jugador.posicion_y + 0.05):
             colision_enemigos = True
         return colision_enemigos    
 

@@ -1,5 +1,26 @@
 class Modelo:
     @property
+    def posicion_x(self):
+        return self._posicion_x
+    @posicion_x.setter
+    def posicion_x(self,posicion_x):
+        self._posicion_x = posicion_x
+    
+    @property
+    def posicion_y(self):
+        return self._posicion_y
+    @posicion_y.setter
+    def posicion_y(self,posicion_y):
+        self._posicion_y = posicion_y
+
+    @property
+    def posicion_z(self):
+        return self._posicion_z
+    @posicion_z.setter
+    def posicion_z(self,posicion_z):
+        self._posicion_z = posicion_z
+
+    @property
     def velocidad(self):
         return self._velocidad
     @velocidad.setter
@@ -35,34 +56,13 @@ class Modelo:
         self._tiempo_anterior = tiempo_anterior
 
     @property
-    def posicion_x(self):
-        return self._posicion_x
-    @posicion_x.setter
-    def posicion_x(self,posicion_x):
-        self._posicion_x = posicion_x
-    
-    @property
-    def posicion_y(self):
-        return self._posicion_y
-    @posicion_y.setter
-    def posicion_y(self,posicion_y):
-        self._posicion_y = posicion_y
-
-    @property
-    def posicion_z(self):
-        return self._posicion_z
-    @posicion_z.setter
-    def posicion_z(self,posicion_z):
-        self._posicion_z = posicion_z
-
-    @property
     def direccion(self):
         return self._direccion
     @direccion.setter
     def direccion(self,direccion):
         self._direccion = direccion
 
-    def __init__(self, posicion_x = -0.7, posicion_y = 0.7, posicion_z = 0.0, velocidad = 0.4, direccion = 0, tiempo_anterior = 0.0):
+    def __init__(self, posicion_x = -0.7, posicion_y = 0.7, posicion_z = 0.0, velocidad = 0.01, direccion = 0, tiempo_anterior = 0.0):
         self._posicion_x = posicion_x
         self._posicion_y = posicion_y
         self._posicion_z = posicion_z
@@ -73,5 +73,6 @@ class Modelo:
     def colisionando(self, modelo):
         assert isinstance(modelo,Modelo)
         colisionando = False
+
 
         
