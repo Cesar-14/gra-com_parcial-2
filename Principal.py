@@ -37,6 +37,7 @@ def actualizar():
     jugador.actualizar(tiempo_delta, window)
     triangulo.actualizar()
     enemigo.actualizar()
+    # limites.actualizar()
 
     tiempo_anterior = tiempo_actual
 
@@ -236,15 +237,10 @@ def draw():
     draw_fondo()
     draw_inicio()
     limites.draw_ganar()
-    
     limites.draw_pared()
     limites.draw_pared_2()
     limites. draw_pared_3()
     limites.draw_pared_4()
-    # draw_enemigos()
-    # draw_triangulo()
-    # draw_enemigos_2()
-    # draw_cuadrado()
     jugador.dibujar()
     triangulo.dibujar()
     enemigo.dibujar()

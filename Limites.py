@@ -83,6 +83,7 @@ class Limites(Modelo):
         glEnd()
         glPopMatrix()
     
+    
     def draw_ganar(self):
 
         glPushMatrix()
@@ -99,14 +100,14 @@ class Limites(Modelo):
 
         glPopMatrix()
     
-    def actualizar(self):
+    # def actualizar(self):
 
-        tiempo_actual = glfw.get_time()
+    #     tiempo_actual = glfw.get_time()
 
-        tiempo_delta = tiempo_actual - self.tiempo_anterior
+    #     self.tiempo_delta = tiempo_actual - self.tiempo_anterior
         
-        self.colision_ganar(tiempo_delta)
-        self.tiempo_anterior = tiempo_actual
+    #     self.colision_ganar()
+    #     self.tiempo_anterior = tiempo_actual
     
     def colision_ganar(self):
         colision_ganar = False
@@ -119,34 +120,30 @@ class Limites(Modelo):
         return colision_ganar
     
     def colisionando(self):
-        colisionando = False
-        colision_ganar = False
+        self.colisionando = False
 
         if (self.posicion_pared_y + 0.43 >= self.posicion_x - 0.43
             and self.posicion_pared_x - 0.43 <= self.posicion_x + 0.43
             and self.posicion_pared_y + 0.03 >= self.posicion_y - 0.03
             and self.posicion_pared_y - 0.03 <= self.posicion_y + 0.03):
-            colisionando = True
-        
+            self.colisionando = True
 
         if (self.posicion_pared2_x + 0.03 >= self.posicion_x - 0.03
             and self.posicion_pared2_x - 0.03 <= self.posicion_x + 0.03
             and self.posicion_pared2_y + 0.43 >= self.posicion_y - 0.43
             and self.posicion_pared2_y - 0.43 <= self.posicion_y + 0.43):
-            colisionando = True
-        
+            self.colisionando = True
 
         if (self.posicion_pared3_x + 0.03 >= self.posicion_x - 0.03
             and self.posicion_pared3_x - 0.03 <= self.posicion_x + 0.03
             and self.posicion_pared3_y + 0.43 >= self.posicion_y - 0.43
             and self.posicion_pared3_y - 0.43 <= self.posicion_y + 0.43):
-            colisionando = True
-
+            self.colisionando = True
 
         if (self.posicion_pared4_x + 0.43 >= self.posicion_x - 0.43
             and self.posicion_pared4_x - 0.43 <= self.posicion_x + 0.43
             and self.posicion_pared4_y + 0.03 >= self.posicion_y - 0.03
             and self.posicion_pared4_y - 0.03 <= self.posicion_y + 0.03):
-            colisionando = True
+            self.colisionando = True
 
-        return colisionando
+        return self.colisionando

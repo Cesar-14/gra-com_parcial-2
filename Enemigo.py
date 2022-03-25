@@ -6,13 +6,15 @@ import math
 from Modelo import Modelo
 from Jugador import *
 
+jugador = Jugador()
+
 class Enemigo(Modelo):
     direccion = 1
     posicion = 0.0
 
     def __init__(self):
-        super().__init__(-0.7, 0.7, 0.0, 3, 0)
-        self.velocidad = 3
+        super().__init__(-0.7, 0.7, 0.0, 4, 0)
+        self.velocidad = 4
         self.angulo = 0.0     
         self.velocidad_rotacion = 400
         self.posicion = 0.0
@@ -54,10 +56,10 @@ class Enemigo(Modelo):
         # Colisión enemigos
         colision_enemigos = False
 
-        if (self.posicion + 0.05 >= Jugador.posicion_x - 0.05
-            and self.posicion - 0.05 <= Jugador.posicion_x + 0.05
-            and self.posicion + 0.05 >= Jugador.posicion_y - 0.05
-            and self.posicion - 0.05 <= Jugador.posicion_y + 0.05):
+        if (self.posicion + 0.05 >= jugador.posicion_x - 0.05
+            and self.posicion - 0.05 <= jugador.posicion_x + 0.05
+            and self.posicion + 0.05 >= jugador.posicion_y - 0.05
+            and self.posicion - 0.05 <= jugador.posicion_y + 0.05):
             colision_enemigos = True
         return colision_enemigos    
 

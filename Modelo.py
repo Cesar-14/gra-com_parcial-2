@@ -62,7 +62,7 @@ class Modelo:
     def direccion(self,direccion):
         self._direccion = direccion
 
-    def __init__(self, posicion_x = -0.7, posicion_y = 0.7, posicion_z = 0.0, velocidad = 0.01, direccion = 0, tiempo_anterior = 0.0):
+    def __init__(self, posicion_x = -0.7, posicion_y = 0.7, posicion_z = 0.0, velocidad = 0.003, direccion = 0, tiempo_anterior = 0.0):
         self._posicion_x = posicion_x
         self._posicion_y = posicion_y
         self._posicion_z = posicion_z
@@ -72,7 +72,7 @@ class Modelo:
     
     def colisionando(self, modelo):
         assert isinstance(modelo,Modelo)
-        colisionando = False
+        self.colisionando = False
 
 
         
